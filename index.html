@@ -5,32 +5,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
 
 <body>
     <span id="span1">
-        <input id="timer1Time" type="text" value="0:00" />
-        <input id="timer1" type="button" value="Start" />
-        <p><div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;" id='countdown1'>0:00</div></p>
+        <input id="timer1Time" type="text" placeholder="0:00" />
+        <input id="countdown1timer" type="button" value="Start" />
+        <input id="countdown1Pause" type="button" value="Pause" />
+        <input id="countdown1Resume" type="button" value="Resume" hidden/>
+        <p>
+        <div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;"
+            id='countdown1'>0:00</div>
+        </p>
     </span>
 
     <span id="span2">
-        <input id="timer2Time" type="text" value="0:00" />
-        <input id="timer2" type="button" value="Start" />
-        <p><div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;" id='countdown2'>0:00</div></p>
+        <input id="timer2Time" type="text" placeholder="0:00" />
+        <input id="countdown2timer" type="button" value="Start" />
+        <input id="countdown2Pause" type="button" class="pause" value="Pause" />
+        <input id="countdown2Resume" type="button" value="Resume" hidden/>
+        <p>
+        <div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;"
+            id='countdown2'>0:00</div>
+        </p>
     </span>
 
     <span id="span3">
-        <input id="timer3Time" type="text" value="0:00" />
-        <input id="timer3" type="button" value="Start" />
-        <p><div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;" id='countdown3'>0:00</div></p>
+        <input id="timer3Time" type="text" placeholder="0:00" />
+        <input id="countdown3timer" type="button" value="Start" />
+        <input id="countdown3Pause" type="button" class="pause" value="Pause" />
+        <input id="countdown3Resume" type="button" value="Resume" hidden/>
+        <p>
+        <div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;"
+            id='countdown3'>0:00</div>
+        </p>
     </span>
 
     <span id="span4">
-        <input id="timer4Time" type="text" value="0:00" />
-        <input id="timer4" type="button" value="Start" />
-        <p><div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;" id='countdown4'>0:00</div></p>
+        <input id="timer4Time" type="text" placeholder="0:00" />
+        <input id="countdown4timer" type="button" value="Start" />
+        <input id="countdown4Pause" type="button" class="pause" value="Pause" />
+        <input id="countdown4Resume" type="button" value="Resume" hidden/>
+        <p>
+        <div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;"
+            id='countdown4'>0:00</div>
+        </p>
     </span>
 </body>
 
@@ -65,34 +86,72 @@
             el.innerHTML = minute_text + ' ' + seconds + ' ' + second_text + '';
             seconds--;
         }, 1000);
+
+        document.getElementById(element + 'Pause').addEventListener('click', function () {
+            clearInterval(interval);
+            this.hidden = true;
+            document.getElementById(element + 'Resume').hidden = false;
+        });
     }
 
     //Start as many timers as you want
-
-    var start1 = document.getElementById('timer1');
-    var start2 = document.getElementById('timer2');
-    var start3 = document.getElementById('timer3');
-    var start4 = document.getElementById('timer4');
+    var start1 = document.getElementById('countdown1timer');
+    var start2 = document.getElementById('countdown2timer');
+    var start3 = document.getElementById('countdown3timer');
+    var start4 = document.getElementById('countdown4timer');
 
     start1.onclick = function () {
-        let timer = document.getElementById('timer1Time').value
+        let timer = document.getElementById('timer1Time').value;
+        this.disabled = "disabled";
         countdown('countdown1', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
     }
 
     start2.onclick = function () {
         let timer = document.getElementById('timer2Time').value
-        countdown('countdown2', 0, 10);
+        this.disabled = "disabled";
+        countdown('countdown2', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
     }
 
     start3.onclick = function () {
         let timer = document.getElementById('timer3Time').value
-        countdown('countdown3', 0, 10);
+        this.disabled = "disabled";
+        countdown('countdown3', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
     }
 
     start4.onclick = function () {
         let timer = document.getElementById('timer4Time').value
-        countdown('countdown4', 0, 10);
+        this.disabled = "disabled";
+        countdown('countdown4', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
     }
+
+    document.getElementById('countdown1' + 'Resume').addEventListener('click', function () {
+        let timer = document.getElementById('countdown1').innerHTML;
+        this.hidden = true;
+        document.getElementById('countdown1' + 'Pause').hidden = false;
+        countdown('countdown1', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
+    });
+
+    document.getElementById('countdown2' + 'Resume').addEventListener('click', function () {
+        let timer = document.getElementById('countdown2').innerHTML;
+        this.hidden = true;
+        document.getElementById('countdown2' + 'Pause').hidden = false;
+        countdown('countdown2', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
+    });
+
+    document.getElementById('countdown3' + 'Resume').addEventListener('click', function () {
+        let timer = document.getElementById('countdown3').innerHTML;
+        this.hidden = true;
+        document.getElementById('countdown3' + 'Pause').hidden = false;
+        countdown('countdown3', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
+    });
+
+    document.getElementById('countdown4' + 'Resume').addEventListener('click', function () {
+        let timer = document.getElementById('countdown4').innerHTML;
+        this.hidden = true;
+        document.getElementById('countdown4' + 'Pause').hidden = false;
+        countdown('countdown4', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
+    });
+
 
 </script>
 
@@ -124,5 +183,12 @@
 
     #span4 {
         background: black;
+    }
+
+    button:disabled,
+    button[disabled] {
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
     }
 </style>
