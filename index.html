@@ -13,45 +13,61 @@
     <span id="span1">
         <input id="timer1Time" type="text" placeholder="0:00" />
         <input id="countdown1timer" type="button" value="Start" />
-        <input id="countdown1Pause" type="button" value="Pause" />
+        <input id="countdown1Pause" type="button" hidden value="Pause" />
         <input id="countdown1Resume" type="button" value="Resume" hidden />
-        <cite style="display: block;" contentEditable="true">Name</cite>
+
+        <input id="countdown1Restart" style="float: right;" hidden type="button" value="Restart" />
+
+        <cite class="bigCite" style="display: block;" contentEditable="true">Name</cite>
         <p>
-            <div id='countdown1'>0:00</div>
+            <cite style="float: right; color: white; font: 1em serif;" contentEditable="true">Type</cite>
+        <div id='countdown1'>0:00</div>
         </p>
     </span>
 
     <span id="span2">
         <input id="timer2Time" type="text" placeholder="0:00" />
         <input id="countdown2timer" type="button" value="Start" />
-        <input id="countdown2Pause" type="button" class="pause" value="Pause" />
+        <input id="countdown2Pause" type="button" class="pause" hidden value="Pause" />
         <input id="countdown2Resume" type="button" value="Resume" hidden />
-        <cite style="display: block;" contentEditable="true">Name</cite>
+
+        <input id="countdown2Restart" style="float: right;" hidden type="button" value="Restart" />
+
+        <cite class="bigCite" style="display: block;" contentEditable="true">Name</cite>
         <p>
-            <div id='countdown2'>0:00</div>
+            <cite style="float: right; color: white; font: 1em serif;" contentEditable="true">Type</cite>
+        <div id='countdown2'>0:00</div>
         </p>
     </span>
 
     <span id="span3">
         <input id="timer3Time" type="text" placeholder="0:00" />
         <input id="countdown3timer" type="button" value="Start" />
-        <input id="countdown3Pause" type="button" class="pause" value="Pause" />
+        <input id="countdown3Pause" type="button" hidden class="pause" value="Pause" />
         <input id="countdown3Resume" type="button" value="Resume" hidden />
-        <cite style="display: block;" contentEditable="true">Name</cite>
+
+        <input id="countdown3Restart" style="float: right;" hidden type="button" value="Restart" />
+
+        <cite class="bigCite" style="display: block;" contentEditable="true">Name</cite>
         <p>
-            <div id='countdown3'>0:00</div>
+            <cite style="float: right; color: white; font: 1em serif;" contentEditable="true">Type</cite>
+        <div id='countdown3'>0:00</div>
         </p>
-        
+
     </span>
 
     <span id="span4">
         <input id="timer4Time" type="text" placeholder="0:00" />
         <input id="countdown4timer" type="button" value="Start" />
-        <input id="countdown4Pause" type="button" class="pause" value="Pause" />
+        <input id="countdown4Pause" type="button" hidden class="pause" value="Pause" />
         <input id="countdown4Resume" type="button" value="Resume" hidden />
-        <cite style="display: block;" contentEditable="true">Name</cite>
+
+        <input id="countdown4Restart" style="float: right;" hidden type="button" value="Restart" />
+
+        <cite class="bigCite" style="display: block;" contentEditable="true">Name</cite>
         <p>
-            <div id='countdown4'>0:00</div>
+            <cite style="float: right; color: white; font: 1em serif;" contentEditable="true">Type</cite>
+        <div id='countdown4'>0:00</div>
         </p>
     </span>
 </body>
@@ -92,6 +108,7 @@
             clearInterval(interval);
             this.hidden = true;
             document.getElementById(element + 'Resume').hidden = false;
+            document.getElementById(element + 'Restart').disabled = false;
         });
     }
 
@@ -103,25 +120,33 @@
 
     start1.onclick = function () {
         let timer = document.getElementById('timer1Time').value;
-        this.disabled = "disabled";
+        this.hidden = "disabled";
+        document.getElementById('countdown1' + 'Pause').hidden = false;
+        document.getElementById('countdown1' + 'Restart').hidden = false;
         countdown('countdown1', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
     }
 
     start2.onclick = function () {
         let timer = document.getElementById('timer2Time').value
-        this.disabled = "disabled";
+        this.hidden = "disabled";
+        document.getElementById('countdown2' + 'Pause').hidden = false;
+        document.getElementById('countdown2' + 'Restart').hidden = false;
         countdown('countdown2', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
     }
 
     start3.onclick = function () {
         let timer = document.getElementById('timer3Time').value
-        this.disabled = "disabled";
+        this.hidden = "disabled";
+        document.getElementById('countdown3' + 'Pause').hidden = false;
+        document.getElementById('countdown3' + 'Restart').hidden = false;
         countdown('countdown3', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
     }
 
     start4.onclick = function () {
         let timer = document.getElementById('timer4Time').value
-        this.disabled = "disabled";
+        this.hidden = "disabled";
+        document.getElementById('countdown4' + 'Pause').hidden = false;
+        document.getElementById('countdown4' + 'Restart').hidden = false;
         countdown('countdown4', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
     }
 
@@ -153,6 +178,41 @@
         countdown('countdown4', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
     });
 
+    document.getElementById('countdown1' + 'Restart').addEventListener('click', function () {
+        let timer = document.getElementById('timer1Time').value
+        document.getElementById('countdown1').innerHTML = timer;
+        this.disabled = "disabled";
+        document.getElementById('countdown1' + 'Pause').hidden = false;
+        document.getElementById('countdown1' + 'Resume').hidden = true;
+        countdown('countdown1', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
+    });
+
+    document.getElementById('countdown2' + 'Restart').addEventListener('click', function () {
+        let timer = document.getElementById('timer2Time').value
+        document.getElementById('countdown2').innerHTML = timer;
+        this.disabled = "disabled";
+        document.getElementById('countdown2' + 'Pause').hidden = false;
+        document.getElementById('countdown2' + 'Resume').hidden = true;
+        countdown('countdown2', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
+    });
+
+    document.getElementById('countdown3' + 'Restart').addEventListener('click', function () {
+        let timer = document.getElementById('timer3Time').value
+        document.getElementById('countdown3').innerHTML = timer;
+        this.disabled = "disabled";
+        document.getElementById('countdown3' + 'Pause').hidden = false;
+        document.getElementById('countdown3' + 'Resume').hidden = true;
+        countdown('countdown3', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
+    });
+
+    document.getElementById('countdown4' + 'Restart').addEventListener('click', function () {
+        let timer = document.getElementById('timer4Time').value
+        document.getElementById('countdown4').innerHTML = timer;
+        this.disabled = "disabled";
+        document.getElementById('countdown4' + 'Pause').hidden = false;
+        document.getElementById('countdown4' + 'Resume').hidden = true;
+        countdown('countdown4', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
+    });
 
 </script>
 
@@ -164,7 +224,8 @@
         margin: 0;
     }
 
-    div, cite {
+    div,
+    .bigCite {
         color: white;
         font-weight: bold;
         font: 8em sans-serif;
