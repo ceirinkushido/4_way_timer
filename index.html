@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <span id="span1">
+        <input id="timer1Time" type="text" value="0:00" />
+        <input id="timer1" type="button" value="Start" />
+        <p><div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;" id='countdown1'>0:00</div></p>
+    </span>
+
+    <span id="span2">
+        <input id="timer2Time" type="text" value="0:00" />
+        <input id="timer2" type="button" value="Start" />
+        <p><div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;" id='countdown2'>0:00</div></p>
+    </span>
+
+    <span id="span3">
+        <input id="timer3Time" type="text" value="0:00" />
+        <input id="timer3" type="button" value="Start" />
+        <p><div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;" id='countdown3'>0:00</div></p>
+    </span>
+
+    <span id="span4">
+        <input id="timer4Time" type="text" value="0:00" />
+        <input id="timer4" type="button" value="Start" />
+        <p><div style="color: white; font-weight: bold; font: 10em sans-serif; text-align: center; margin: 0, auto;" id='countdown4'>0:00</div></p>
+    </span>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    function countdown(element, minutes, seconds) {
+        // Fetch the display element
+        var el = document.getElementById(element);
+
+        // Set the timer
+        var interval = setInterval(function () {
+            if (seconds == 0) {
+                if (minutes == 0) {
+                    (el.innerHTML = "STOP!");
+
+                    clearInterval(interval);
+                    return;
+                } else {
+                    minutes--;
+                    seconds = 59;
+                }
+            }
+
+            if (minutes > 0) {
+                var minute_text = minutes + (minutes > 1 ? ':' : ':');
+            } else {
+                var minute_text = '';
+            }
+
+            var second_text = seconds > 1 ? '' : '';
+            el.innerHTML = minute_text + ' ' + seconds + ' ' + second_text + '';
+            seconds--;
+        }, 1000);
+    }
+
+    //Start as many timers as you want
+
+    var start1 = document.getElementById('timer1');
+    var start2 = document.getElementById('timer2');
+    var start3 = document.getElementById('timer3');
+    var start4 = document.getElementById('timer4');
+
+    start1.onclick = function () {
+        let timer = document.getElementById('timer1Time').value
+        countdown('countdown1', timer.substring(0, timer.indexOf(':')), timer.substring(timer.indexOf(':') + 1));
+    }
+
+    start2.onclick = function () {
+        let timer = document.getElementById('timer2Time').value
+        countdown('countdown2', 0, 10);
+    }
+
+    start3.onclick = function () {
+        let timer = document.getElementById('timer3Time').value
+        countdown('countdown3', 0, 10);
+    }
+
+    start4.onclick = function () {
+        let timer = document.getElementById('timer4Time').value
+        countdown('countdown4', 0, 10);
+    }
+
+</script>
+
+<style>
+    body {
+
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    span {
+        width: 50%;
+        height: 50vh;
+        float: left;
+    }
+
+    #span1 {
+        background: green;
+    }
+
+    #span2 {
+        background: red;
+    }
+
+    #span3 {
+        background: blue;
+    }
+
+    #span4 {
+        background: black;
+    }
+</style>
